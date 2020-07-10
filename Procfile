@@ -1,0 +1,1 @@
+web: java -Dserver.port=5000 -DskipTests=true -jar build/libs/tipps-server-0.0.1-SNAPSHOT.jar

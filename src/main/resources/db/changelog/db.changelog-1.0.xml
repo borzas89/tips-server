@@ -1,0 +1,70 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet id="1" author="borzas">
+        <sql>
+            CREATE TABLE user (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            username VARCHAR(255) NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            role VARCHAR(255) NOT NULL,
+            subscription_start TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            subscription_end TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE user;
+        </rollback>
+    </changeSet>
+    <changeSet id="2" author="borzas">
+        <sql>
+            CREATE TABLE bettingtip (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            event VARCHAR(255) NOT NULL,
+            tipp VARCHAR(255) NOT NULL,
+            odds DOUBLE,
+            stake DOUBLE,
+            date_string VARCHAR(255),
+            pic_url VARCHAR(1000),
+            date_stamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            sport_category VARCHAR(255),
+            deadline VARCHAR(255) NOT NULL,
+            category VARCHAR(255) NOT NULL,
+            analysis VARCHAR(1000),
+            tippster VARCHAR(255) NOT NULL,
+            tipp_uid VARCHAR(255),
+            result VARCHAR(255),
+            is_win BOOLEAN,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE bettingtip;
+        </rollback>
+    </changeSet>
+    <changeSet id="3" author="borzas">
+        <sql>
+            CREATE TABLE singletip (
+            id BIGINT NOT NULL AUTO_INCREMENT,
+            event VARCHAR(255) NOT NULL,
+            tipp VARCHAR(255) NOT NULL,
+            odds DOUBLE,
+            stake DOUBLE,
+            date_string VARCHAR(255),
+            date_stamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            sport_category VARCHAR(255),
+            deadline VARCHAR(255) NOT NULL,
+            category VARCHAR(255) NOT NULL,
+            tippster VARCHAR(255) NOT NULL,
+            tipp_uid VARCHAR(255),
+            result VARCHAR(255),
+            is_win BOOLEAN,
+            CONSTRAINT PK_id PRIMARY KEY (id)
+            );
+        </sql>
+        <rollback>
+            DROP TABLE singletip;
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

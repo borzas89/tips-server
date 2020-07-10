@@ -1,0 +1,34 @@
+image: openjdk:8u111-jdk-alpine
+
+cache:
+  key: ${CI_PROJECT_NAME}
+
+stages:
+  - infra
+  - build
+  - deploy
+
+ec2:
+  stage: infra
+  script:
+    - aws configure --profile aws
+    - echo "Csatlakozz AWS"
+    - echo "keszisd el az infrat"
+  when: manual
+
+buildJava:
+  stage: build
+  script:
+    - chmod +x gradlew
+    - ./gradlew clean build --refresh-dependencies
+    - echo "lebuildeli a jar-t es masold fel a repoba vagy artifact bagitlab"
+    - ls
+  artifacts:
+    paths:
+    - /builds/Drunkbag89/tipps-server/build/libs/
+
+deployJava:
+  stage: deploy
+  script:
+    - echo "Csatlakozz AWS masold fel az ec2 be es inditsa el"
+    #- scp  ec2-user@52.59.227.123://builds/Drunkbag89/tipps-server/build/libs/* /
