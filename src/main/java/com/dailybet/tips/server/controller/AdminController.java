@@ -34,6 +34,12 @@ public class AdminController {
         return new ResponseEntity<>(userService.updateUser(user), HttpStatus.CREATED);
     }
 
+    @GetMapping( "api/admin/user-get/id")
+    public ResponseEntity<?> getUserById( @RequestParam("id") String userId)
+    {
+        return new ResponseEntity<>(userService.findUserById(userId), HttpStatus.OK);
+    }
+
     @PostMapping("/api/admin/user-delete")
     public ResponseEntity<?> deleteUser(@RequestBody User user){
         userService.deleteUser(user.getId());
